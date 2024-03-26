@@ -10,6 +10,9 @@ readme = "README.md"
 python = "^3.11"
 click = "^8.1.7"
 
+[tool.poetry.scripts]
+ddu = "dyndns_updater:ddu"
+
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.7.0"
 

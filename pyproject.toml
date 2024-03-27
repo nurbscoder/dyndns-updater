@@ -9,9 +9,12 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 click = "^8.1.7"
+keyring = "^25.0.0"
+keyrings-alt = "^5.0.0"
+pydantic = "^2.6.4"
 
 [tool.poetry.scripts]
-ddu = "dyndns_updater:ddu"
+ddu = "dyndns_updater.ddu:ddu"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.7.0"

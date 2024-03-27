@@ -1,4 +1,6 @@
 from .ddu import ddu
 
 if __name__ == "__main__":
-    ddu()
+    from dyndns_updater import ddu
+
+    ddu.ddu()

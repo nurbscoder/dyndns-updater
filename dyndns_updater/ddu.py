@@ -48,6 +48,21 @@ def ddu():
     pass
 
 
+@ddu.command
+def list():
+    setup_db_file = Path(click.get_app_dir(APP_NAME, roaming=False)) / "setup_db.json"
+    if setup_db_file.exists():
+        if not setup_db_file.is_file():
+            click.ClickException(f"Setup DB file {setup_db_file} is not a valid file")
+        setup_db = SetupDB.model_validate_json(setup_db_file.read_text())
+    else:
+        setup_db = SetupDB(setups=[])
+    for s in setup_db.setups:
+        click.echo(s.name)
+        click.echo(f"  |-> UUID: {s.uuid}")
+        click.echo(f"  |-> Provider: {s.provider.provider_type}")
+
+
 @ddu.group(help="Add a new DynDNS setup")
 @click.option("-n", "--name", help="Specify a name for the setup", type=str)
 @click.pass_context

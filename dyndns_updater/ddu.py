@@ -55,7 +55,7 @@ def add(ctx, name: str):
     ctx.obj = Repo(name=name, uuid=uuid4())
 
 
-@click.command(help="Specify ALL-INKL DynDNS setup")
+@add.command(help="Specify ALL-INKL DynDNS setup")
 @click.option("-u", "--user", type=str, prompt=True, help="DDNS user")
 @click.option("-p", "--password", type=str, prompt=True, hide_input=True, help="DDNS password")
 @pass_repo
@@ -72,6 +72,3 @@ def all_inkl(repo: Repo, user: str, password: str):
     setup_db.setups.append(setup)
     setup_db_file.parent.mkdir(exist_ok=True, parents=True)
     setup_db_file.write_text(setup_db.model_dump_json())
-
-
-add.add_command(all_inkl)

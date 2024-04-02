@@ -38,6 +38,17 @@ def list():
             click.echo(f"  |-> Provider: {setup.provider.provider_type}")
 
 
+@ddu.command
+@click.option("-u", "--uuid", help="UUID of entry to delete", type=str, required=True)
+def delete(uuid: str):
+
+    with setup_db(DB_FILE) as setups:
+        to_delete = [s for s in setups.setups if s.uuid == uuid][0]
+        setups.setups.remove(to_delete)
+    keyring.delete_password(f"ddns_{uuid}", "user")
+    keyring.delete_password(f"ddns_{uuid}", "password")
+
+
 @ddu.group(help="Add a new DynDNS setup")
 @click.option("-n", "--name", help="Specify a name for the setup", type=str)
 @click.pass_context
@@ -51,6 +62,7 @@ def add(ctx, name: str):
 @pass_repo
 def all_inkl(repo: Repo, user: str, password: str):
     setup = DynDNSSetup(name=repo.name, uuid=str(repo.uuid), provider=AllInklProvider())
-    keyring.set_password(f"ddns_{setup.uuid}", user, password)
+    keyring.set_password(f"ddns_{setup.uuid}", "user", user)
+    keyring.set_password(f"ddns_{setup.uuid}", "password", password)
     with setup_db(DB_FILE) as s:
         s.setups.append(setup)

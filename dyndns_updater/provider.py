@@ -13,3 +13,4 @@ class DynDNSProvider(str, enum.Enum):
 class AllInklProvider(BaseModel):
     provider_type: Literal[DynDNSProvider.ALL_INKL] = DynDNSProvider.ALL_INKL
     update_url: HttpUrl = Field(default=HttpUrl("https://dyndns.kasserver.com/"))
+    credentials: list[tuple[str, str]]

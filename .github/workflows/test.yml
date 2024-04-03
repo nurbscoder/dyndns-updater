@@ -36,4 +36,3 @@ jobs:
       - name: Run tests
         run: |
           poetry run pytest test_dyndns_updater
-          coverage report

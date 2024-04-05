@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ddns-updater"
-version = "0.1.1"
+version = "1.0.0"
 description = "Package for updating DynDNS services"
 authors = ["Markus Frings <coding@frings-mail.de>"]
 license = "MIT"

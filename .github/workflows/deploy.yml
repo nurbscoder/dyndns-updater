@@ -1,7 +1,10 @@
 name: deploy
 run-name: Deploy to PyPI
 
-on: pull_request
+on:
+  push:
+    tags:
+      - v*.*.*
 
 jobs:
   deploy:
